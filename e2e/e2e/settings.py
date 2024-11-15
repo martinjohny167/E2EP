@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'employee',
-        'USER': 'martin_new',
-        'PASSWORD': 'Martin199805##',    
-        'HOST': 'M_SERVER',
+        'USER': '',
+        'PASSWORD': '',    
+        'HOST': '',
         'PORT': '',
 
         'OPTIONS': {
