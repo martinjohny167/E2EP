@@ -1,4 +1,3 @@
-
 from django.test import TestCase, Client
 from django.urls import reverse
 from .models import UserMaster,Candidate,Company,JobDetails,ApplyList
@@ -168,6 +167,3 @@ class JobDetailsTestCase(TestCase):                     # JObDetails Model testc
 
     def test_job_details(self):
         return f"{self.job} details {self.job.jobname}"
-
-
-

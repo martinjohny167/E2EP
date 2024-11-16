@@ -73,21 +73,20 @@ WSGI_APPLICATION = 'e2e.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'employee',
-        'USER': 'martin_new',
-        'PASSWORD': 'Martin199805##',    
-        'HOST': 'M_SERVER',
-        'PORT': '',
-
+        'NAME': 'employee',  # Replace with your database name
+        'HOST': 'MARTIN\\M_SERVER',   # Replace with your SQL Server hostname or IP
+        'PORT': '',               # Default port for SQL Server
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
+            'driver': 'ODBC Driver 17 for SQL Server',  # Ensure this matches your driver
+            'trusted_connection':'yes'
         },
-    },
+    }
 }
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
