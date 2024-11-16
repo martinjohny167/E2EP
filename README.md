@@ -62,8 +62,7 @@ python manage.py test
 	- Admin can view the dashboard
 	- View the users list by selecting the Users List option in the sidebar and can manage(delete) the users if needed
 	- Admin can view the company list by selecting the Company List option in the sidebar and can manage(delete,update) campanies if needed 
-	
-	
+
 # Detailed explanation
 Modules and Features
 
@@ -164,4 +163,5 @@ Review job applications and interact with potential candidates.
 
 Log in to the admin portal using the credentials (username: admin, password: admin).
 Manage user accounts and company profiles.
-Monitor platform activity through the admin dashboard.
+Monitor platform activity through the admin dashboard.	
+	
