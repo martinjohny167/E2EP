@@ -4,7 +4,7 @@ from django.urls import reverse
 from .models import UserMaster,Candidate,Company,JobDetails,ApplyList
 
 
-class UserMasterTestCase(TestCase):                       # UserMaster Model Testcase
+class UserMasterTestCase(TestCase):                       # UserMaster Model Testcase updated
     def setUp(self):
         self.user = UserMaster.objects.create(
             email='e2e@gmail.com',
