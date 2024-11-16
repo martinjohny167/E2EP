@@ -19,7 +19,7 @@ urlpatterns = [
     path("apply/<int:pk>", views.ApplyPage, name="apply"),
     path("applyjob/<int:pk>",views.ApplyJob, name="applyjob"),
 
-    ###### Company Urls #####
+    ###### Company Urls updated#####
     path("companyindex/", views.CompanyIndexPage, name="companyindex"),
     path("companyprofile/<int:pk>", views.CompanyProfilePage, name="companyprofile"),
     path("updatecompanyprofile/<int:pk>", views.UpdateCompanyProfile, name="updatecompanyprofile"),
