@@ -4,7 +4,7 @@ from .models import UserMaster, Candidate, Company, JobDetails, ApplyList
 from random import randint
 
 
-# Create your views here.
+# Create your updated views here.
 
 
 def IndexPage(request):  # Index(Home) page
