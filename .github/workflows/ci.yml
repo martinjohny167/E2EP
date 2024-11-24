@@ -54,7 +54,7 @@ jobs:
 
     - name: Update Django Database Settings for CI
       run: |
-        sed -i 's/DATABASES = {.*}/DATABASES = {"default": {"ENGINE": "django.db.backends.mysql", "NAME": "testdb", "USER": "testuser", "PASSWORD": "testpass", "HOST": "127.0.0.1", "PORT": "3306",}}/' e2e/settings.py
+        sed -i 's/DATABASES = {.*}/DATABASES = {"default": {"ENGINE": "django.db.backends.mysql", "NAME": "testdb", "USER": "testuser", "PASSWORD": "testpass", "HOST": "127.0.0.1", "PORT": "3306",}}/' e2e/e2e/settings.py
 
     - name: Run Migrations
       working-directory: e2e  # Navigate to the folder containing manage.py
