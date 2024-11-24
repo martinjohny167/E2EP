@@ -76,18 +76,19 @@ WSGI_APPLICATION = 'e2e.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'employee',
-        'USER': '',
-        'PASSWORD': '',    
-        'HOST': '',
-        'PORT': '',
-
+        'ENGINE': 'sql_server.pyodbc',
+        'NAME': 'database-1',
+        'USER': 'admin',
+        'PASSWORD': 'Shiron123',
+        'HOST': 'database-1.cb4mkgku0315.us-east-2.rds.amazonaws.com',  # E.g., 'my-sql-server-db.cq2drh1z8fuw.us-east-1.rds.amazonaws.com'
+        'PORT': '1433',
         'OPTIONS': {
             'driver': 'ODBC Driver 17 for SQL Server',
+            'extra_params': 'TrustServerCertificate=yes;',  # Optional for certificate trust
         },
-    },
+    }
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
