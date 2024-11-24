@@ -78,7 +78,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'mssql',
         'NAME': 'employee',   
-        'HOST': 'MARTIN\\M_SERVER',
+        'HOST': '', # add server name
         'PORT': '',
 
         'OPTIONS': {
