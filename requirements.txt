@@ -3,3 +3,4 @@ django-mssql-backend==2.8.1
 mssql-django==1.2
 Pillow
 mysqlclient
+pip install gunicorn
