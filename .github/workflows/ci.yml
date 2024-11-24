@@ -1,4 +1,4 @@
-name: CI Workflow
+name: Django CI Workflow
 
 on:
   push:
@@ -9,17 +9,31 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Node.js
-      uses: actions/setup-node@v3
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
       with:
-        node-version: '20'
+        python-version: '3.10' # Adjust this based on your Python version
+
     - name: Install Dependencies
-      run: npm install
-    - name: Run Lint
-      run: npm run lint
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run Migrations
+      run: |
+        source venv/bin/activate
+        python manage.py migrate
+
     - name: Run Tests
-      run: npm test -- --coverage
+      run: |
+        source venv/bin/activate
+        python manage.py test
