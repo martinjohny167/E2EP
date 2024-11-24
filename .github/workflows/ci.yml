@@ -31,8 +31,10 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirement.txt
-
+    
+          python manage.py test --keepdb
       - name: Run Tests
+        working-directory: e2e
         run: |
           source venv/bin/activate
           python manage.py test --keepdb
