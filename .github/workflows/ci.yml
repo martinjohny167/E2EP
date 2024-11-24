@@ -11,7 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-<<<<<<< HEAD
     steps:
     - uses: actions/checkout@v3
     - name: Set up Node.js
@@ -35,8 +34,6 @@ deploy:
       run: |
         heroku git:remote -a e2ep
         git push heroku main
-=======
->>>>>>> dfaff04e3b4c3c55e47a6b04cbed3caba07cb7c8
 
     steps:
     - name: Checkout Repository
