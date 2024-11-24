@@ -32,6 +32,9 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
 
+    - name: Install MySQL Development Libraries
+      run: sudo apt-get install -y default-libmysqlclient-dev build-essential
+
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
@@ -42,7 +45,7 @@ jobs:
         python -m venv venv
         source venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirement.txt
+        pip install -r requirements.txt
 
     - name: Wait for MySQL to be Ready
       run: |
@@ -52,18 +55,35 @@ jobs:
           sleep 5
         done
 
+    - name: Grant Permissions to MySQL User
+      run: |
+        mysql -h 127.0.0.1 -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'testuser'@'%' IDENTIFIED BY 'testpass'; FLUSH PRIVILEGES;"
+
     - name: Update Django Database Settings for CI
       run: |
-        sed -i 's/DATABASES = {.*}/DATABASES = {"default": {"ENGINE": "django.db.backends.mysql", "NAME": "testdb", "USER": "testuser", "PASSWORD": "testpass", "HOST": "127.0.0.1", "PORT": "3306",}}/' e2e/e2e/settings.py
+        python -c "
+import os
+settings_file = 'e2e/settings.py'  # Adjust this if settings.py is in another location
+if not os.path.exists(settings_file):
+    raise FileNotFoundError(f'{settings_file} not found!')
+with open(settings_file, 'r') as f:
+    content = f.read()
+content = content.replace(
+    'DATABASES = {',
+    'DATABASES = {\"default\": {\"ENGINE\": \"django.db.backends.mysql\", \"NAME\": \"testdb\", \"USER\": \"testuser\", \"PASSWORD\": \"testpass\", \"HOST\": \"127.0.0.1\", \"PORT\": \"3306\",}}'
+)
+with open(settings_file, 'w') as f:
+    f.write(content)
+        "
 
     - name: Run Migrations
-      working-directory: e2e  # Navigate to the folder containing manage.py
+      working-directory: e2e  # Adjust if manage.py is in a different location
       run: |
         source ../venv/bin/activate
         python manage.py migrate
 
     - name: Run Tests
-      working-directory: e2e  # Navigate to the folder containing manage.py
+      working-directory: e2e  # Adjust if manage.py is in a different location
       run: |
         source ../venv/bin/activate
         python manage.py test
