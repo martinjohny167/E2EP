@@ -1,4 +1,4 @@
-name: Django CI/CD Workflow
+name: Django CI Workflow
 
 on:
   push:
@@ -13,8 +13,24 @@ permissions:
   id-token: write
 
 jobs:
-  test-and-deploy:
+  test:
     runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -u root -proot"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: testdb
+          MYSQL_USER: testuser
+          MYSQL_PASSWORD: testpass
 
     steps:
       - name: Checkout Repository
@@ -31,26 +47,30 @@ jobs:
           source venv/bin/activate
           pip install --upgrade pip
           pip install -r requirement.txt
-    
-          python manage.py test --keepdb
+      - name: Wait for MySQL to be Ready
+        run: |
+          for i in {1..15}; do
+            mysql -h 127.0.0.1 -u root -proot -e "SELECT 1;" && break
+            echo "Waiting for MySQL..."
+            sleep 5
+          done
+      - name: Grant Permissions to MySQL User
+        run: |
+          mysql -h 127.0.0.1 -u root -proot -e "CREATE USER IF NOT EXISTS 'testuser'@'%' IDENTIFIED BY 'testpass';"
+          mysql -h 127.0.0.1 -u root -proot -e "GRANT ALL PRIVILEGES ON *.* TO 'testuser'@'%'; FLUSH PRIVILEGES;"
+      - name: Drop Existing Test Database
+        run: |
+          mysql -h 127.0.0.1 -u root -proot -e "DROP DATABASE IF EXISTS test_testdb;"
+      - name: Update Django Database Settings for CI
+        run: |
+          sed -i 's/DATABASES = {.*}/DATABASES = {"default": {"ENGINE": "django.db.backends.mysql", "NAME": "testdb", "USER": "testuser", "PASSWORD": "testpass", "HOST": "127.0.0.1", "PORT": "3306", "TEST": {"NAME": "testdb"}}}/' e2e/e2e/settings.py
+      - name: Run Migrations
+        working-directory: e2e
+        run: |
+          source ../venv/bin/activate
+          python manage.py migrate
       - name: Run Tests
         working-directory: e2e
         run: |
-          source venv/bin/activate
+          source ../venv/bin/activate
           python manage.py test --keepdb
-
-      - name: Debug Heroku Authentication
-        env:
-          HEROKU_API_KEY: ${{ secrets.HRKU-5ae0fd11-88f1-46d4-9388-e0034a446281 }}
-        run: |
-          echo $HEROKU_API_KEY | heroku auth:token
-          heroku auth:whoami
-
-      - name: Deploy to Heroku
-        env:
-          HEROKU_API_KEY: ${{ secrets.HRKU-5ae0fd11-88f1-46d4-9388-e0034a446281 }}
-        run: |
-          echo $HEROKU_API_KEY | heroku auth:token
-          heroku container:login
-          heroku container:push web --app Appdev2
-          heroku container:release web --app Appdev2
