@@ -61,7 +61,7 @@ jobs:
 
     - name: Update Django Database Settings for CI
       run: |
-        python -c "
+        python <<EOF
 import os
 settings_file = 'e2e/settings.py'  # Adjust this if settings.py is in another location
 if not os.path.exists(settings_file):
@@ -74,7 +74,7 @@ content = content.replace(
 )
 with open(settings_file, 'w') as f:
     f.write(content)
-        "
+EOF
 
     - name: Run Migrations
       working-directory: e2e  # Adjust if manage.py is in a different location
