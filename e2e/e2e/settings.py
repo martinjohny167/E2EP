@@ -77,13 +77,13 @@ WSGI_APPLICATION = 'e2e.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'mssql',
-        'NAME': 'employee',   
-        'HOST': '', # add server name
-        'PORT': '',
-
+        'NAME': 'employee',  # Your database name
+        'USER': 'martin_new',  # SQL Server username
+        'PASSWORD': 'Martin199805##',  # SQL Server password
+        'HOST': 'MARTIN\\M_SERVER',  # Double backslash to escape the backslash in the instance name
+        'PORT': '',  # Leave empty or specify '1433' if default port is used
         'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',
-            'trusted_connection':'yes'   
+            'driver': 'ODBC Driver 17 for SQL Server',  # Ensure this driver is installed
         },
     },
 }
