@@ -76,17 +76,15 @@ WSGI_APPLICATION = 'e2e.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'mssql',
-        'NAME': 'employee',  # Your database name
-        'USER': 'martin_new',  # SQL Server username
-        'PASSWORD': 'Martin199805##',  # SQL Server password
-        'HOST': 'MARTIN\\M_SERVER',  # Double backslash to escape the backslash in the instance name
-        'PORT': '',  # Leave empty or specify '1433' if default port is used
-        'OPTIONS': {
-            'driver': 'ODBC Driver 17 for SQL Server',  # Ensure this driver is installed
-        },
+        'ENGINE': 'django.db.backends.mysql',  # MySQL database backend for Django
+        'NAME': 'testdb',  # The database name as set in the workflow
+        'USER': 'testuser',  # MySQL username as set in the workflow
+        'PASSWORD': 'testpass',  # MySQL password as set in the workflow
+        'HOST': '127.0.0.1',  # Host for the MySQL service (localhost in CI)
+        'PORT': '3306',  # MySQL default port
     },
 }
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
