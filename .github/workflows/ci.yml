@@ -83,7 +83,7 @@ jobs:
 
       - name: Deploy to Heroku
         env:
-          HEROKU_API_KEY: ${{ secrets.HRKU-f9eeed2b-d695-4e73-841d-b68eac4a2957 }}
+          HEROKU_API_KEY: ${{ secrets.HRKU-5ae0fd11-88f1-46d4-9388-e0034a446281 }}
         run: |
           source venv/bin/activate
           heroku container:login
