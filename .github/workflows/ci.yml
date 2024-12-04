@@ -22,7 +22,7 @@ jobs:
         python-version: '3.10'
 
     - name: Install Dependencies
-      working-directory: ./E2EP/e2e
+      working-directory: ./E2EP
       run: |
         python -m venv venv
         source venv/bin/activate
