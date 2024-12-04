@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'employee',  # Your database name
         'USER': 'root',  # MySQL username
         'PASSWORD': 'Martin1999!',  # MySQL password
-        'HOST': '44.202.138.221',  # Replace with the public IP address of your EC2 instance
+        'HOST': '3.86.139.205',  # Replace with the public IP address of your EC2 instance
         'PORT': '3306',  # Default MySQL port
     },
 }
