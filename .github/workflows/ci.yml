@@ -1,4 +1,4 @@
-name: Django CI Workflow
+name: Django CI/CD Workflow
 
 on:
   push:
@@ -19,7 +19,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v3
       with:
-        python-version: '3.10' # Adjust this based on your Python version
+        python-version: '3.10'
 
     - name: Install Dependencies
       run: |
