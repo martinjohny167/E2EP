@@ -26,17 +26,18 @@ jobs:
         python -m venv venv
         source venv/bin/activate
         pip install --upgrade pip
-        pip install -r requirements.txt
-      working-directory: E2EP
+        pip install -r requirement.txt
 
     - name: Run Migrations
       run: |
         source venv/bin/activate
         python e2e/manage.py migrate
-      working-directory: E2EP
 
     - name: Run Tests
       run: |
         source venv/bin/activate
         python e2e/manage.py test
-      working-directory: E2EP
+
+    - name: Debug Directory Structure (Optional)
+      run: |
+        ls -R
