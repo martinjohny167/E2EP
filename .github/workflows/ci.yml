@@ -33,7 +33,7 @@ jobs:
       run: |
         source venv/bin/activate
         python e2e/manage.py migrate
-      working-directory: E2EP
+      working-directory: E2EP/e2e
 
     - name: Run Tests
       run: |
