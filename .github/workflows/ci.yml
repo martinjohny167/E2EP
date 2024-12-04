@@ -27,13 +27,16 @@ jobs:
         source venv/bin/activate
         pip install --upgrade pip
         pip install -r requirements.txt
+      working-directory: E2EP
 
     - name: Run Migrations
       run: |
         source venv/bin/activate
-        python manage.py migrate
+        python e2e/manage.py migrate
+      working-directory: E2EP
 
     - name: Run Tests
       run: |
         source venv/bin/activate
-        python manage.py test
+        python e2e/manage.py test
+      working-directory: E2EP
