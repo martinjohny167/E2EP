@@ -163,5 +163,5 @@ Review job applications and interact with potential candidates.
 
 Log in to the admin portal using the credentials (username: admin, password: admin).
 Manage user accounts and company profiles.
-Monitor platform activity through the admin dashboard.	
+Monitor platform activity through the admin dashboard.1	
 	
