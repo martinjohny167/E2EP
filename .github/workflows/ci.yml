@@ -38,6 +38,4 @@ jobs:
         source venv/bin/activate
         python e2e/manage.py test
 
-    - name: Debug Directory Structure (Optional)
-      run: |
-        ls -R
+   
