@@ -11,5 +11,5 @@ tzdata==2024.2
 mysqlclient>=2.1.0
 gunicorn
 django-heroku
-
+django-heroku
 
